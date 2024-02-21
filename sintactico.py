@@ -149,8 +149,8 @@ def append_result(message):
 
 def p_error(p):
     if p:
-        append_result(f"Error de Sintaxix en '{p.value}' en la línea {p.lineno}")
-        print(f"Error de Sintaxix en '{p.value}' en la línea {p.lineno}")
+        append_result(f"Error de Sintaxis en '{p.value}' en la línea {p.lineno}")
+        print(f"Error de Sintaxis en '{p.value}' en la línea {p.lineno}")
     else:
         aux="Error de Sintaxis al final del código"
         append_result(aux)
