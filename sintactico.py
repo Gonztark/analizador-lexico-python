@@ -27,6 +27,16 @@ def p_statement_assign(p):
     | ID ASSIGN expression SEMICOLON'''
     names[p[2]] = p[4]
 
+def p_statement_function(p):
+    '''statement : FUNCTION ID LPARENT RPARENT block
+                 | FUNCTION ID LPARENT VAR ID RPARENT block'''
+    if len(p) == 6:
+       
+        print("Función sin parámetros")
+    elif len(p) == 8:
+        names[p[5]] = 0  
+        print("Función con parámetro")
+
 def p_statement_if(p):
     'statement : IF LPARENT expression RPARENT block'
     if p[3]:
@@ -44,16 +54,6 @@ def p_statement_for(p):
 def p_statement_return(p):
     'statement : RETURN expression SEMICOLON'
 
-
-def p_statement_function(p):
-    '''statement : FUNCTION ID LPARENT RPARENT block
-                 | FUNCTION ID LPARENT VAR ID RPARENT block'''
-    if len(p) == 6:
-       
-        print("Función sin parámetros")
-    elif len(p) == 8:
-        names[p[5]] = 0  
-        print("Función con parámetro")
 
 def p_block(p):
     '''block : LBRACE statements RBRACE
@@ -94,7 +94,9 @@ def p_expression_name(p):
     try:
         p[0] = names[p[1]]
     except LookupError:
-        print(f"Nombre no reconocido '{p[1]}'")
+        nr = f"Nombre no reconocido '{p[1]}'"
+        print(nr)
+        append_result(nr)
         p[0] = 0
 
 
