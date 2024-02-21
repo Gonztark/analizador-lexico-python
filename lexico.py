@@ -3,8 +3,6 @@ import ply.lex as lex
 reserved = {
     'SCAN': 'IF', 
     'PATROL': 'WHILE', 
-    'OPEN': 'LBRACE', 
-    'CLOSE': 'RBRACE', 
     'CODEC': 'FUNCTION', 
     'QUEST': 'FOR', 
     'SUMMON': 'CALL', 
@@ -19,7 +17,7 @@ tokens = list(reserved.values()) + [
     'ID', 'NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE',
     'ASSIGN', 'NE', 'LT', 'LTE', 'GT', 'GTE',
     'LPARENT', 'RPARENT', 'COMMA', 'SEMICOLON',
-    'DOT', 'STRING','COMMENT'
+    'DOT', 'STRING','COMMENT', 'LBRACE', 'RBRACE'
 ]
 
 # Ignorar espacios y tabulaciones
@@ -76,6 +74,9 @@ def t_error(t):
 
 lexer = lex.lex()
 
+def reset_lines():
+    lexer.lineno = 1
+
 def analizar_lexico(texto):
     lexer.input(texto)
     resultado = ""
@@ -85,5 +86,6 @@ def analizar_lexico(texto):
             break 
         resultado += str(tok) + "\n"
     return resultado
+
 
 
